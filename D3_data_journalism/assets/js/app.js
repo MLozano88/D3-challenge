@@ -1,12 +1,12 @@
 // @TODO: YOUR CODE HERE!
 var svgWidth = 960;
-var svgHeight = 500;
+var svgHeight = 700;
 
 var margin = {
   top: 20,
   right: 40,
   bottom: 60,
-  left: 100
+  left: 80
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -34,11 +34,11 @@ d3.csv("assets/data/data.csv").then(function(data) {
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([20, d3.max(data, d => d.smokes)])
+      .domain([20, d3.max(data, d => d.age)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.age)])
+      .domain([0, d3.max(data, d => d.smokes)])
       .range([height, 0]);
 
     // Step 3: Create axis functions
@@ -61,9 +61,9 @@ d3.csv("assets/data/data.csv").then(function(data) {
     .data(data)
     .enter()
     .append("circle")
-    .attr("cx", d => xLinearScale(d.smokes))
-    .attr("cy", d => yLinearScale(d.age))
-    .attr("r", "15")
+    .attr("cx", d => xLinearScale(d.age))
+    .attr("cy", d => yLinearScale(d.smokes))
+    .attr("r", "12")
     .attr("fill", "blue")
     .attr("opacity", ".5");
 
@@ -74,7 +74,7 @@ d3.csv("assets/data/data.csv").then(function(data) {
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Smokers");
+      .text("Smokers (%)");
 
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
