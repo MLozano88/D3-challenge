@@ -20,3 +20,9 @@ var svg = d3.select(".chart")
 
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+//Importing data
+d3.csv("data.csv").then(function(data) {
+
+
+  });
