@@ -22,7 +22,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 //Importing data
-d3.csv("assests/data/data.csv").then(function(data) {
+d3.csv("data.csv").then(function(data) {
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================
@@ -41,6 +41,30 @@ d3.csv("assests/data/data.csv").then(function(data) {
       .domain([0, d3.max(data, d => d.age)])
       .range([height, 0]);
 
-    
+    // Step 3: Create axis functions
+    // ==============================
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
+
+    // Step 4: Append Axes to the chart
+    // ==============================
+    chartGroup.append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(bottomAxis);
+
+    chartGroup.append("g")
+      .call(leftAxis);
+
+    // Step 5: Create Circles
+    // ==============================
+    var circlesGroup = chartGroup.selectAll("circle")
+    .data(data)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xLinearScale(d.smokes))
+    .attr("cy", d => yLinearScale(d.age))
+    .attr("r", "15")
+    .attr("fill", "blue")
+    .attr("opacity", ".5");
 
   });
