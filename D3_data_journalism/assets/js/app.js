@@ -34,12 +34,12 @@ d3.csv("assets/data/data.csv").then(function(data) {
     // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([20, d3.max(data, d => d.age)])
-      .range([0, width]);
+      .domain([30, d3.max(data, d => d.age)])
+      .range([8.5, width]);
 
     var yLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.smokes)])
-      .range([height, 0]);
+      .domain([8, d3.max(data, d => d.smokes)])
+      .range([height, 35]);
 
     // Step 3: Create axis functions
     // ==============================
@@ -79,7 +79,7 @@ d3.csv("assets/data/data.csv").then(function(data) {
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Age");
+      .text("Age (Median)");
 
     
   }).catch(function(error) {
