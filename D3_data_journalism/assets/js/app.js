@@ -22,7 +22,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 //Importing data
-d3.csv("data.csv").then(function(data) {
+d3.csv("assets/data/data.csv").then(function(data) {
 
     // Step 1: Parse Data/Cast as numbers
     // ==============================
@@ -67,4 +67,21 @@ d3.csv("data.csv").then(function(data) {
     .attr("fill", "blue")
     .attr("opacity", ".5");
 
-  });
+    // Create axes labels
+    chartGroup.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 40)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .attr("class", "axisText")
+      .text("Smokers");
+
+    chartGroup.append("text")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("class", "axisText")
+      .text("Age");
+
+    
+  }).catch(function(error) {
+    console.log(error);
+});
